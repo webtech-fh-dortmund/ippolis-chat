@@ -1,0 +1,376 @@
+* {
+  box-sizing: border-box;
+}
+
+.hiddenElement {
+  display: none;
+}
+.borderless {
+  border-width: 0;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+
+#chatbox {
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  margin-top: 60px;
+}
+
+#userInput {
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  margin-top: 60px;
+  margin-bottom: 20px;
+}
+
+#textInput {
+  width: 90%;
+  border: none;
+  border-bottom: 1px solid #f55500;
+  /* 000000AA */
+  font-family: monospace;
+  font-size: 17px;
+}
+
+#textInput:focus {
+  outline: 1px solid black;
+}
+
+.userText {
+  text-align: right;
+}
+
+.userText span {
+  background-color: #dedfe0;
+  padding: 10px;
+  border-radius: 2px;
+}
+
+.userText, .botText {
+  font-size: 17px;
+  line-height: 30px;
+  color: black;
+  font-family: monospace;
+}
+/*########################
+###Bot Text and Feedback##
+########################*/
+.botText {
+  text-align: left;
+}
+
+/* Color each p and subelements in the bot message */
+.botText p, .botText p * {
+  background-color: #ffd7b4;
+}
+/* Only color the intro text and details fully */
+.botText span, details {
+  background-color: #ffd7b4;
+  padding: 5px 0px 5px 5px;
+  border-radius: 2px;
+}
+.botText details {
+  width: fit-content;
+}
+.botText details summary {
+  padding-left: 2px;
+  width: fit-content;
+  cursor: pointer;
+}
+.botText details summary:hover {
+  background-color: rgba(245, 85, 0, 0.85);
+  color: white;
+}
+.feedbackDiv {
+  padding-top: 4px;
+}
+.feedbackButton {
+  cursor: pointer;
+}
+.feedbackButton:disabled {
+  cursor: default;
+}
+.metadataFlex {
+  align-items: start;
+  align-content: flex-start;
+  flex-direction: column;
+}
+/*#########################
+#Bot Text and Feedback End#
+#########################*/
+
+.bg_box {
+  background-color: #191c1f;
+}
+
+.boxed_header {
+  margin-left: auto;
+  margin-right: auto;
+  width: 60%;
+  margin-top: 20px;
+  border: 1px solid black;
+  background-color: white;
+}
+
+.boxed {
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  background-color: white;
+}
+
+/*#########################
+###########Buttons#########
+#########################*/
+#sendMessageB, #sendFeedbackB {
+  border: 1px solid #f55500b3;
+  border-radius: 10px;
+
+  background: white;
+  /* #dedfe0 */
+  margin: 10px 0px 10px 0px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: black;
+}
+
+#sendMessageB:hover, #sendFeedbackB:hover {
+  background-color: rgba(245, 85, 0, 0.85);
+  color: white;
+}
+
+#stopStreamingB {
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 45px;
+
+  background: white;
+  margin: 10px 0px 10px 0px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: black;
+}
+#downloadChatlogB {
+  border: 1px solid black;
+  border-radius: 10px;
+
+  background: white;
+  margin: 10px 0px 10px 0px;
+  padding: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: black;
+}
+
+#stopStreamingB:hover, #downloadChatlogB:hover {
+  background-color: #dedfe0;
+}
+/*#########################
+########Buttons End########
+#########################*/
+
+#grid_div {
+  grid-template-areas: 'title' 'main' 'footer';
+  /* grid-template-rows: 100px auto 80px; */
+  /* grid-template-rows: 150px auto 80px; */
+  /* grid-template-rows: min-content auto 80px; */
+  /* best*/
+  grid-template-rows: min-content auto auto;
+  height: 100vh;
+  width: 100%;
+}
+
+footer {
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  /* margin-left: 20%;
+  margin-right: 20%; */
+  width: 60%;
+  border: 1px solid black;
+  background-color: white;
+  /* padding: 10px 10px 20px 10px; */
+  padding: 20px;
+  grid-area: footer;
+}
+
+footer a {
+  margin: 0px 5px 0px 5px;
+  margin: 5px;
+  text-decoration: none;
+  color: black;
+}
+
+footer a:hover {
+  text-decoration: none;
+  color: #f55500;
+}
+
+.flag-img {
+  cursor: pointer;
+}
+
+/*########################
+######Typing Indicator####
+########################*/
+.typing-indicator {
+  display: flex;
+  width: 60px;
+}
+.typing-indicator span {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: black;
+  border-radius: 50%;
+  opacity: 0.2;
+}
+.typing-indicator span:nth-of-type(1) {
+  -webkit-animation: 1s blink infinite 0.3333s;
+          animation: 1s blink infinite 0.3333s;
+}
+.typing-indicator span:nth-of-type(2) {
+  -webkit-animation: 1s blink infinite 0.6666s;
+          animation: 1s blink infinite 0.6666s;
+}
+.typing-indicator span:nth-of-type(3) {
+  -webkit-animation: 1s blink infinite 0.9999s;
+          animation: 1s blink infinite 0.9999s;
+}
+
+@-webkit-keyframes blink {
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
+}
+/*########################
+###Typing Indicator End###
+########################*/
+
+/*########################
+######Adaptive Layout####
+########################*/
+@media screen and (((max-width:768px) and (orientation:portrait)) or ((orientation:landscape) and ((max-width:768px) and (max-height:540px)))) {
+  #chatbox {
+    width: 80%;
+    margin-top: 0px;
+  }
+
+  #userInput {
+    width: 80%;
+    margin-top: 0px;
+  }
+
+  #sendMessageB, #sendFeedbackB {
+    margin: 10px 0px 10px 0px;
+    padding: 15px;
+  }
+
+  .userText {
+    font-size: 13px;
+    line-height: 23px;
+  }
+  .botText {
+    font-size: 13px;
+    line-height: 23px;
+  }
+
+  h1 {
+    font-size: 1.3em;
+  }
+  footer {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width:400px) {
+  #textInput {
+    width: 250px;
+  }
+  /* Color each p and subelements in the bot message */
+  .botText p, .botText p p {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+  #chatbox {
+    width: 80%;
+    margin-top: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
+    /* padding-left: 5px; */
+    padding-right: 5px;
+  }
+
+  #userInput {
+    width: 100%;
+    margin-top: 0px;
+  }
+
+  #sendMessageB, #sendFeedbackB {
+    margin: 10px 0px 10px 0px;
+    padding: 15px;
+  }
+
+  .userText {
+    font-size: 12px;
+    line-height: 23px;
+  }
+  .botText {
+    font-size: 12px;
+    line-height: 23px;
+  }
+
+  h1 {
+    font-size: 1.3em;
+  }
+  footer {
+    width: 100%;
+  }
+  
+  .boxed {
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    width: 100%;
+    background-color: #001424;
+  }
+  .boxed_header {
+    margin-left: 0px;
+    margin-right: 0px;
+    padding-left: 40px;
+    padding-right: 40px;
+    width: 100%;
+    background-color: #cccccc;
+  }
+  input, button, #sendMessageB, #stopStreamingB, #downloadChatlogB, #sendFeedbackB {
+    background-color: #cccccc;
+  }
+  #locale-switcher {
+    flex-direction: column;
+  }
+}
+/*########################
+####Adaptive Layout End###
+########################*/

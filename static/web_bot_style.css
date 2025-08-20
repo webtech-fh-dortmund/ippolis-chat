@@ -1,0 +1,194 @@
+body {
+  background-color: #333333;
+}
+.hiddenElement {
+  display: none;
+}
+.flag-img {
+  cursor: pointer;
+}
+
+.boxed_header {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#grid_div {
+  grid-template-areas: 'title' 'main' 'footer';
+  height: 100%;
+  width: 100%;
+}
+
+#chatbox {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 100px;
+}
+
+.userText, .botText {
+  font-size: 17px;
+  line-height: 30px;
+  color: black;
+  font-family: monospace;
+}
+
+.userText {
+  align-self: flex-end;
+}
+
+.userText span {
+  text-align: left;
+  background-color: #dedfe0;
+  padding: 10px;
+  margin: 0 10px 0 10px;
+  border-radius: 12px;
+}
+
+/*########################
+###Bot Text and Feedback##
+########################*/
+
+.botText {
+  text-align: left;
+  border-radius: 12px;
+  background-color: #ffd7b4;
+  padding: 5px 10px 5px 10px;
+  margin: 5px 10px 5px 10px;
+  width: 80%;
+}
+/* Adjust each p and subelements in the bot message */
+.botText p, .botText p * {
+  margin: 0px;
+}
+/*#########################
+#Bot Text and Feedback End#
+#########################*/
+
+/*#########################
+###########Buttons#########
+#########################*/
+#userInput {
+  padding: 5px 5px 5px 5px;
+  display: grid;
+  grid-template-areas: "a1" "a2";
+  grid-template-columns: 80%;
+  justify-content: center;
+
+  position: sticky;
+  bottom: -2px;
+  background-color: #333333;
+}
+
+#textInput {
+  width: 100%;
+  padding: 4px;
+  margin-top: 8px;
+  border: 1px solid #f55500;
+  border-radius: 8px;
+  font-family: monospace;
+  font-size: 17px;
+  grid-area: a1;
+}
+#textInput:focus {
+  outline: 1px solid black;
+}
+#textInput:disabled {
+  background-color: #666666;
+  color: white;
+}
+
+#buttonBox {
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  grid-area: a2;
+}
+
+#sendMessageB, #stopStreamingB, #sendFeedbackB {
+  padding: 8px;
+  margin-top: 8px;
+  background-color: #ffd7b4;
+  border: 1px solid #f55500;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#sendMessageB:hover, #sendFeedbackB:hover, #stopStreamingB:hover, #downloadChatlogB:hover {
+  background-color: rgba(245, 85, 0, 0.85);
+  color: white;
+}
+#downloadChatlogB {
+  padding: 8px;
+  margin-top: 8px;
+  background-color: #ffd7b4;
+  border: 1px solid #f55500;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/*#########################
+########Buttons End########
+#########################*/
+
+/*########################
+######Typing Indicator####
+########################*/
+.typing-indicator {
+  display: flex;
+  width: 60px;
+}
+.typing-indicator span {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: black;
+  border-radius: 50%;
+  opacity: 0.2;
+}
+.typing-indicator span:nth-of-type(1) {
+  -webkit-animation: 1s blink infinite 0.3333s;
+          animation: 1s blink infinite 0.3333s;
+}
+.typing-indicator span:nth-of-type(2) {
+  -webkit-animation: 1s blink infinite 0.6666s;
+          animation: 1s blink infinite 0.6666s;
+}
+.typing-indicator span:nth-of-type(3) {
+  -webkit-animation: 1s blink infinite 0.9999s;
+          animation: 1s blink infinite 0.9999s;
+}
+
+@-webkit-keyframes blink {
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 1;
+  }
+}
+/*########################
+###Typing Indicator End###
+########################*/
+
+/*########################
+######Adaptive Layout####
+########################*/
+@media screen and (min-width:500px) {
+  
+  #chatbox {
+    align-items: center;
+  }
+
+  .userText span {
+    margin: 0 50px 0 10px;
+  }
+
+}
+/*########################
+####Adaptive Layout End###
+########################*/

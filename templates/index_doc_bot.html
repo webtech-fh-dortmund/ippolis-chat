@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Doc-Bot</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="static/web_bot_style.css" type="text/css" />
+	<link rel="stylesheet" href="../static/web_bot_style.css" type="text/css" />
+
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+	<div id="grid_div" style="display: grid;">
+
+		<div class="boxed_header" style="grid-area: title; margin-bottom: 20px; display: grid; grid-template-columns: auto 74px; grid-template-areas: 'a1 a2' 'a1 a2' ;">
+			<h1 id="header" align="center" style="margin-bottom: 0px; margin-top: 0px; grid-area: a1;"><b></b>
+				<img style="vertical-align: middle;" src="../static/Avatar_08_Kopf_Weiss_63.png" alt="Bot-Icon"
+					width="110" height="105">
+			</h1>
+			<div id="locale-switcher" style="grid-area: a2; margin: 6px 0 0 0; display: flex; margin-bottom: 4px;">
+				<img id="de-local-flag" class="flag-img" alt="DE" src="../static/de.svg" width="33" height="22">
+				<img id="gb-local-flag" class="flag-img" alt="EN" src="../static/gb.svg" width="33" height="22">
+			</div>
+		</div>
+
+		<main style="grid-area: main;">
+			<div id="chatbox">
+				<p class="botText">
+					<span id="intro-text">
+					</span>
+
+					<button id="thumbsUpButton" class="hiddenElement feedbackButton"
+						onClick="(function(){sendFeedback(1,-1);})();"
+						style="vertical-align: top; margin: 0 2px 0 2px;">
+						<img src="../static/thumbs_up.png" alt="Daumen hoch" width="22" height="22">
+					</button>
+					<button id="thumbsNeutralButton" class="hiddenElement feedbackButton"
+						onClick="(function(){sendFeedback(0,-1);})();"
+						style="vertical-align: top; margin: 0 2px 0 0;">
+						<img src="../static/thumbs_up.png" alt="Daumen neutral" width="22" height="22"
+							style="transform: rotate(270deg);">
+					</button>
+					<button id="thumbsDownButton" class="hiddenElement feedbackButton"
+						onClick="(function(){sendFeedback(-1,-1);})();" style="vertical-align: top; margin: 0;">
+						<img src="../static/thumbs_up.png" alt="Daumen runter" width="22" height="22"
+							style="transform: rotate(180deg);">
+					</button>
+				</p>
+				
+			</div>
+			<div id="userInput">
+				<input id="textInput" type="text" name="msg" placeholder="Sende eine Nachricht an Doc-Bot"/>
+
+				<div id="buttonBox">
+					<button id="sendMessageB">Senden</button>
+					<button id="stopStreamingB">Stop</button>
+					<button id="sendFeedbackB" onClick="(function(){sendFeedbackText();})();">Feedback senden</button>
+					<label for="best_rag_matches" style="color: white; align-self: center;">Zu suchende Dokumente:</label>
+					<input type="number" id="best_rag_matchesTF" name="best_rag_matches" value="10" min="5" max="100" style="align-self: center; height: 20px; width: 40px;">
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<script src="../static/socket.io.js"></script>
+	<script src="../static/marked.js"></script>
+	<script src="../static/web-widget.js"></script>
+
+	<script>
+		// Customize the script via setting up the variables
+		enableFeedbackButtons = false;
+		minimalistic_design = true;
+		botId = "Doc-Bot";
+
+		introText["de"] = "Hallo! Ich bin Doc-Bot. Nach welchem Dokument im Intranet suchst du? Bitte beachte, dass mein Kenntnisstand vom 10.03.2025 ist und ich spätere Änderungen an Dokumenten nicht wissen kann.",
+    	introText["en"] = "Hello! I'm Doc-Bot. Which document are you looking for?"
+		setup_website();
+
+		customFormatMetadata = function formatMetadata(answer) {
+			let result = "";
+			result += "<ul style='background-color: #ffd7b4;'>";
+			for (let m of JSON.parse(answer)) {
+				let item = "";
+				// For testing
+				// item = "<a target=\"_blank\" href=\"https://intranet.fh-dortmund.de"+m.source+"\">"+m.source+"</a>"+" "+m.text+", KNN-Distance: "+m.distance
+				// Default
+				item = "<a target=\"_blank\" href=\"https://intranet.fh-dortmund.de"+m.source+"\">"+m.text+"</a>"
+
+				result += "<li>"+item+"</li>"
+			}
+			result += "</ul>";
+			return result;
+		}
+		
+		document.getElementById('best_rag_matchesTF').addEventListener('change', function () {
+
+			let best_rag_matchesTF = document.getElementById('best_rag_matchesTF');
+
+			console.log(best_rag_matchesTF.value)
+
+			// Only continue if the entered value can be converted to a number
+			if (!isNaN(+best_rag_matchesTF.value)) {
+				// Clamp the value between 5 and 100
+				if (best_rag_matchesTF.value > 100) {
+					best_rag_matchesTF.value = 100;
+				} else if (best_rag_matchesTF.value < 5) {
+					best_rag_matchesTF.value = 5;
+				}
+				// let button = document.getElementById('thumbsdDownButton_' + requestId);
+
+				socket.emit("set_best_rag_matches", { best_rag_matches: best_rag_matchesTF.value, botId: botId }, function () {
+				});
+			}
+		})
+	</script>
+</body>
+
+</html>

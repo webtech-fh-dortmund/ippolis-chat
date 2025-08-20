@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>FB4 Info-Bot</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="static/fh_bot_style.css" type="text/css" />
+	<link rel="stylesheet" href="../static/fh_bot_style.css" type="text/css" />
+
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+	<div id="grid_div" style="display: grid;">
+
+		<div class="bg_box">
+			<div class="boxed_header" style="grid-area: title; margin-bottom: 20px;">
+				<div style="display: grid; grid-template-columns: auto 74px; grid-template-areas: 'a1 a2'
+																'a1 a2' 
+																;">
+					<h1 id="header" align="center" style="margin-bottom: 0px; margin-top: 0px; grid-area: a1;"><b>FB4 Info-GPT</b>
+						<img style="vertical-align: middle;" src="../static/Avatar_08_Kopf_Weiss_63.png" alt="Bot-Icon"
+							width="110" height="105">
+					</h1>
+					<div style="grid-area: a2; margin: 6px 0 0 0;">
+						<div id="locale-switcher" style="display: flex; margin-bottom: 4px;">
+							<img id="de-local-flag" class="flag-img" alt="DE" src="../static/de.svg" width="33" height="22">
+							<img id="gb-local-flag" class="flag-img" alt="EN" src="../static/gb.svg" width="33" height="22">
+						</div>
+						<div id="page_url" style="font-size: small; font-weight: bold; overflow-wrap: anywhere;">www.fh.do/ippolis-chat</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="boxed">
+			<div style="grid-area: main; display: flex; flex-flow: column nowrap;">
+				<div id="chatbox">
+					<p class="botText">
+						<span id="intro-text">
+						</span>
+
+						<button id="thumbsUpButton" class="hiddenElement feedbackButton"
+							onClick="(function(){sendFeedback(1,-1);})();"
+							style="vertical-align: top; margin: 0 2px 0 2px;">
+							<img src="../static/thumbs_up.png" alt="Daumen hoch" width="22" height="22">
+						</button>
+						<button id="thumbsNeutralButton" class="hiddenElement feedbackButton"
+							onClick="(function(){sendFeedback(0,-1);})();"
+							style="vertical-align: top; margin: 0 2px 0 0;">
+							<img src="../static/thumbs_up.png" alt="Daumen neutral" width="22" height="22"
+								style="transform: rotate(270deg);">
+						</button>
+						<button id="thumbsDownButton" class="hiddenElement feedbackButton"
+							onClick="(function(){sendFeedback(-1,-1);})();" style="vertical-align: top; margin: 0;">
+							<img src="../static/thumbs_up.png" alt="Daumen runter" width="22" height="22"
+								style="transform: rotate(180deg);">
+						</button>
+					</p>
+				</div>
+				<div id="userInput">
+					<input id="textInput" type="text" name="msg" placeholder="Nachricht" />
+
+					<div>
+						<button id="sendMessageB">Senden</button>
+						<button id="stopStreamingB">Stop</button>
+						<div style="display: flex; align-items: center; visibility: hidden;">
+							<div id="speedRangeText">Geschwindigkeit</div>
+							<form>
+								<div hidden>
+									<input type="radio" name="botPerformance" value="fastest">
+									<input type="radio" name="botPerformance" value="fast">
+									<input type="radio" name="botPerformance" value="balanced" checked>
+									<input type="radio" name="botPerformance" value="good">
+									<input type="radio" name="botPerformance" value="best">
+								</div>
+								<input type="range" step="1" max="4" value="2" name="botPerformanceRange">
+							</form>
+							<div id="qualityRangeText">Qualität</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		<div class="bg_box" style="grid-area: footer;">
+			<footer>
+				<div style="border: 1px solid black; margin-bottom: 20px;">
+					<a href="https://fh.do/ippolis">
+						<img src="../static/ippolis_logo.svg" class="" height="135" width="180"
+							alt="IPPOLIS-Schriftzug, wobei das 'O' durch ein Gehirn mit Doktorhut ersetzt wird">
+					</a>
+					<img id="bmftrHeader" src="../static/bmftr_logo.svg" class="" height="135" width="180"
+						alt="Förderhinweis des Bundesministeriums für Forschung, Technologie und Raumfahrt">
+
+					<img id="mkw_nrwHeader" src="../static/nrw_mkw_logo.webp" class="" style="padding: 0px 5px 0px 5px"
+						height="36" width="180" alt="Förderhinweis des Ministeriums für Kultur und Wissenschaft NRW">
+					<div style="padding: 0px 5px 0px 5px">Förderkennzeichen: 16DHBKI050</div>
+				</div>
+
+				<div style="border: 1px solid black; padding: 15px 5px 15px 5px; display: flex; flex-wrap: wrap;">
+					<a href="https://ippolis.pages.inf.fh-dortmund.de/www/impressum.html">Impressum</a>
+				</div>
+			</footer>
+		</div>
+	</div>
+
+	<script src="../static/socket.io.js"></script>
+	<script src="../static/marked.js"></script>
+	<script src="../static/web-widget.js"></script>
+
+	<script>
+		botId = "Info-GPT";
+		// Customize the script via setting up the variables
+		introText["de"] = "Hallo! Ich bin Info-GPT. Ich kann viele organisatorische Fragen zu deinem Studium beantworten. Falls ich einen Fehler mache, sag mir das bitte, möglicherweise finde ich dann doch eine Lösung 🙂",
+    	introText["en"] = "Hello! I am Info-GPT. I can answer many question about your studies. Please don't be mad at me if i make mistakes or take a while to answer 🙂"
+		setup_website();
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+python-dotenv
+flask
+flask_socketio
+gevent
+gevent-websocket
+langchain
+sentence_transformers
+scikit-learn
+beautifulsoup4
+Flask-Security
+flask-security[fsqla,common]
+PyMuPDF

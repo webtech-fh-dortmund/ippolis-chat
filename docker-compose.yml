@@ -1,0 +1,12 @@
+services:
+  llm-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - running_locally="${LLM_BOT_RUNNING_LOCALLY}"
+        - system_port=5002
+        - exposed_port=8002
+    restart: always
+    ports:
+      - "8002:5002"

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Maintenance {{ title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+	<div>
+		Down for maintenance. We are sorry for the inconvenience, but the {{ title }} will be back up soon!<br>
+		{{ downtime }}
+	</div>
+</body>
+
+</html>

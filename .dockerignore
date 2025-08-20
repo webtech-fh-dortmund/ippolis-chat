@@ -1,0 +1,6 @@
+*.bat
+*.md
+Dockerfile
+*.env
+info-gpt/
+__pycache__/

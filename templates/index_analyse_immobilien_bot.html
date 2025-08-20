@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>IPPOLIS-Analyse</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="static/web_bot_style.css" type="text/css" />
+	<link rel="stylesheet" href="../static/web_bot_style.css" type="text/css" />
+
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+<body>
+	<div id="grid_div" style="display: grid;">
+
+		<div class="boxed_header" style="grid-area: title; margin-bottom: 20px; display: grid; grid-template-columns: auto 74px; grid-template-areas: 'a1 a2' 'a1 a2' ;">
+			<h1 id="header" align="center" style="margin-bottom: 0px; margin-top: 0px; grid-area: a1;"><b></b>
+				<img style="vertical-align: middle;" src="../static/Omar.png" alt="Bot-Icon"
+					width="220" height="210">
+			</h1>
+			<div id="locale-switcher" style="grid-area: a2; margin: 6px 0 0 0; display: flex; margin-bottom: 4px;">
+				<img id="de-local-flag" class="flag-img" alt="DE" src="../static/de.svg" width="33" height="22">
+				<img id="gb-local-flag" class="flag-img" alt="EN" src="../static/gb.svg" width="33" height="22">
+			</div>
+		</div>
+
+		<main style="grid-area: main;">
+			<div id="chatbox">
+				<p class="botText">
+					<span id="intro-text">
+					</span>
+
+					<button id="thumbsUpButton" class="hiddenElement feedbackButton"
+						onClick="(function(){sendFeedback(1,-1);})();"
+						style="vertical-align: top; margin: 0 2px 0 2px;">
+						<img src="../static/thumbs_up.png" alt="Daumen hoch" width="22" height="22">
+					</button>
+					<button id="thumbsNeutralButton" class="hiddenElement feedbackButton"
+						onClick="(function(){sendFeedback(0,-1);})();"
+						style="vertical-align: top; margin: 0 2px 0 0;">
+						<img src="../static/thumbs_up.png" alt="Daumen neutral" width="22" height="22"
+							style="transform: rotate(270deg);">
+					</button>
+					<button id="thumbsDownButton" class="hiddenElement feedbackButton"
+						onClick="(function(){sendFeedback(-1,-1);})();" style="vertical-align: top; margin: 0;">
+						<img src="../static/thumbs_up.png" alt="Daumen runter" width="22" height="22"
+							style="transform: rotate(180deg);">
+					</button>
+				</p>
+				
+			</div>
+			<div id="userInput">
+				<input id="textInput" type="text" name="msg" placeholder="Sende eine Nachricht"/>
+
+				<div id="buttonBox">
+					<button id="sendMessageB">Senden</button>
+					<button id="stopStreamingB">Stop</button>
+					<button id="sendFeedbackB" onClick="(function(){sendFeedbackText();})();">Feedback senden</button>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<script src="../static/socket.io.js"></script>
+	<script src="../static/marked.js"></script>
+	<script src="../static/web-widget.js"></script>
+
+	<script>
+		// Customize the script via setting up the variables
+		enableFeedbackButtons = false;
+		minimalistic_design = true;
+		botId = "analyse_immobilien_bot";
+
+		introText["de"] = "Guten Tag, mein Name ist Omar Karim. Ich bin Immobilienmakler mit langjähriger Praxiserfahrung. Wenn es bei meiner Aufgabenstellung Unklarheiten gibt – etwa zur Ausstattung, zur Wohnfläche oder zu Mietbegriffen – schreiben Sie mir gern. Ich unterstütze Sie, damit Sie die Daten realistisch einschätzen können.",
+    	introText["en"] = "Guten Tag, mein Name ist Omar Karim. Ich bin Immobilienmakler mit langjähriger Praxiserfahrung. Wenn es bei meiner Aufgabenstellung Unklarheiten gibt – etwa zur Ausstattung, zur Wohnfläche oder zu Mietbegriffen – schreiben Sie mir gern. Ich unterstütze Sie, damit Sie die Daten realistisch einschätzen können."
+		setup_website();
+
+		customFormatMetadata = function formatMetadata(answer) {
+			let result = "";
+			return result;
+		}
+	</script>
+</body>
+
+</html>
